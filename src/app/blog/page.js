@@ -8,7 +8,11 @@ async function getData(){
     const res = await fetch(endpoint)//HTTP GET METHOD
 
     if (!res.ok){
-        throw new Error("Failed to Ftech data")
+        throw new Error("Failed to Fetch data")
+    }
+    //making sure content type is application/json
+    if (res.headers.get("content-type") !== "application/json"){
+        return{items:[]}
     }
     //otherwise return JSON data
     return res.json()
