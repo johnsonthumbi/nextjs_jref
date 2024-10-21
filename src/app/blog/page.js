@@ -1,8 +1,10 @@
 //app--blog--page.js
 //'use client'
+import getDomain from "../lib/getDomain"
 async function getData(){
+    const domain = getDomain()
     //1 grab endpoint - API?
-    const endpoint = "http://localhost:3000/api/posts"
+    const endpoint = `${domain}/api/posts` //third party API requests??
     const res = await fetch(endpoint)//HTTP GET METHOD
 
     if (!res.ok){
@@ -15,6 +17,8 @@ async function getData(){
 export default async function BlogPage(){
     const data = await getData()
     const items = data && data.items ? [...data.items] : []
+    console.log(items)
+    console.log(process.env.NEXT_PUBLIC_VERCEL_URL)
     return <main>
         <h1>Hello World</h1>
         {/*{data && JSON.stringify(data)}*/}
